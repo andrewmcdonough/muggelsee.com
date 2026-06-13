@@ -20,7 +20,7 @@
       "id": "wendenschloss",
       "label": "Wendenschloss",
       "url": "/areas/wendenschloss/",
-      "center": [52.437, 13.607],
+      "center": [52.4293641, 13.5866699],
       "zoom": 14,
       "color": "#8a6c3e"
     },
@@ -44,7 +44,7 @@
       "id": "hirschgarten",
       "label": "Hirschgarten",
       "url": "/areas/hirschgarten/",
-      "center": [52.452, 13.733],
+      "center": [52.454582, 13.5649118],
       "zoom": 15,
       "color": "#5c7a52"
     },
@@ -60,7 +60,7 @@
       "id": "schoeneiche",
       "label": "Schöneiche",
       "url": "/areas/schoeneiche/",
-      "center": [52.418, 13.716],
+      "center": [52.4777931, 13.6643541],
       "zoom": 14,
       "color": "#6b5e9e"
     },

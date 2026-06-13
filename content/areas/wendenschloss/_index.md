@@ -4,8 +4,8 @@ date            = 2025-01-01
 draft           = false
 area_id         = "wendenschloss"
 tagline         = "Peaceful waterfront neighbourhood on the Langer See"
-map_center_lat  = 52.437
-map_center_lon  = 13.607
+map_center_lat  = 52.4293641
+map_center_lon  = 13.5866699
 map_zoom        = 14
 +++
 

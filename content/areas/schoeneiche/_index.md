@@ -4,8 +4,8 @@ date            = 2025-01-01
 draft           = false
 area_id         = "schoeneiche"
 tagline         = "Leafy suburb with tram connections and forest trails"
-map_center_lat  = 52.418
-map_center_lon  = 13.716
+map_center_lat  = 52.4777931
+map_center_lon  = 13.6643541
 map_zoom        = 14
 +++
 

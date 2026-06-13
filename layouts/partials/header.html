@@ -1,6 +1,8 @@
 <header class="site-header">
   <div class="container">
-    <a href="/" class="site-logo">Müggelsee</a>
+    <a href="/" class="site-logo" aria-label="Müggelsee — home">
+      <img src="/logo.png" alt="Müggelsee" height="38">
+    </a>
     <nav class="site-nav">
       <a href="/areas/" {{ if eq .Section "areas" }}class="active"{{ end }}>Areas</a>
       <a href="/places/" {{ if eq .Section "places" }}class="active"{{ end }}>Places</a>

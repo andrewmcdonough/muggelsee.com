@@ -225,6 +225,19 @@ p:last-child { margin-bottom: 0; }
    Homepage
    ============================================= */
 
+.home-hero {
+  width: 100%;
+  background: var(--color-dark);
+  line-height: 0;
+}
+
+.home-hero img {
+  width: 100%;
+  height: 580px;
+  object-fit: cover;
+  display: block;
+}
+
 .hero {
   background: var(--color-white);
   padding: var(--space-16) 0 var(--space-12);
@@ -1021,6 +1034,8 @@ input[type="checkbox"] {
   .map-wrap--tall .map { height: 360px; }
 
   .event-item { grid-template-columns: 1fr; gap: var(--space-2); }
+
+  .home-hero img { height: 360px; }
 
   .photo-hero-btn img { height: 280px; }
 

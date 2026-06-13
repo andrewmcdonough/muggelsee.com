@@ -1,4 +1,14 @@
 {{ define "main" }}
+{{- $heroImg := .Resources.GetMatch "muggelsee.*" -}}
+{{- if $heroImg -}}
+{{- $heroImg = $heroImg.Fill "1600x680 Smart" -}}
+<div class="home-hero">
+  <img src="{{ $heroImg.RelPermalink }}"
+       alt="Müggelsee lake on a summer evening"
+       width="{{ $heroImg.Width }}" height="{{ $heroImg.Height }}"
+       loading="eager">
+</div>
+{{- end }}
 <section class="hero">
   <div class="container">
     <h1>{{ .Site.Title }}</h1>
