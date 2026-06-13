@@ -6,10 +6,13 @@ googleAnalytics = "G-ZBBQ6ZER8W"
 
 [params]
   description = "Your guide to living and exploring around Müggelsee, Berlin"
-  mapbox_style  = "mapbox://styles/mapbox/light-v11"
   map_default_lat  = 52.438
   map_default_lon  = 13.645
   map_default_zoom = 12
+
+[params.mapbox]
+  token = ""
+  style = "mapbox://styles/mapbox/light-v11"
   formspree_id = ""
 
 [taxonomies]

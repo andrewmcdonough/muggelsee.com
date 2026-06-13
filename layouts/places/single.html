@@ -117,8 +117,8 @@ window.GALLERY_IMAGES = [{{ range $i, $img := $images }}{{ if $i }},{{ end }}{"s
 {{ with .Params.lat }}
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
 <script>
-  const MAPBOX_TOKEN = "{{ $.Site.Params.mapbox_token }}";
-  const MAPBOX_STYLE = "{{ $.Site.Params.mapbox_style }}";
+  const MAPBOX_TOKEN = "{{ $.Site.Params.mapbox.token }}";
+  const MAPBOX_STYLE = "{{ $.Site.Params.mapbox.style }}";
   const PLACE_LAT = {{ $.Params.lat }};
   const PLACE_LON = {{ $.Params.lon }};
   const PLACE_TITLE = {{ $.Title | jsonify }};

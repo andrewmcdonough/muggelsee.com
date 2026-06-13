@@ -67,8 +67,8 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
 {{ partial "places-data.html" . }}
 <script>
-  const MAPBOX_TOKEN = "{{ .Site.Params.mapbox_token }}";
-  const MAPBOX_STYLE = "{{ .Site.Params.mapbox_style }}";
+  const MAPBOX_TOKEN = "{{ .Site.Params.mapbox.token }}";
+  const MAPBOX_STYLE = "{{ .Site.Params.mapbox.style }}";
   const AREA_ID = "{{ .Params.area_id }}";
   const MAP_CENTER = [{{ .Params.map_center_lon }}, {{ .Params.map_center_lat }}];
   const MAP_ZOOM = {{ .Params.map_zoom }};

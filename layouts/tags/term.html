@@ -22,8 +22,8 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
 {{ partial "places-data.html" . }}
 <script>
-  const MAPBOX_TOKEN = "{{ .Site.Params.mapbox_token }}";
-  const MAPBOX_STYLE = "{{ .Site.Params.mapbox_style }}";
+  const MAPBOX_TOKEN = "{{ .Site.Params.mapbox.token }}";
+  const MAPBOX_STYLE = "{{ .Site.Params.mapbox.style }}";
   const TAG_FILTER = "{{ .Data.Term }}";
   const MAP_CENTER = [{{ .Site.Params.map_default_lon }}, {{ .Site.Params.map_default_lat }}];
   const MAP_ZOOM = {{ .Site.Params.map_default_zoom }};

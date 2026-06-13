@@ -2,7 +2,7 @@
 title           = "Müggelheim"
 date            = 2025-01-01
 draft           = false
-area_id         = "mueggelsee-village"
+area_id         = "mueggelheim"
 tagline         = "Quiet forest village on the south shore of the lake"
 map_center_lat  = 52.403
 map_center_lon  = 13.640

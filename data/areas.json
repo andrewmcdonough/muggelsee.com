@@ -1,6 +1,14 @@
 {
   "areas": [
     {
+      "id": "friedrichshagen",
+      "label": "Friedrichshagen",
+      "url": "/areas/friedrichshagen/",
+      "center": [52.458, 13.621],
+      "zoom": 14,
+      "color": "#b06a2e"
+    },
+    {
       "id": "rahnsdorf",
       "label": "Rahnsdorf",
       "url": "/areas/rahnsdorf/",
@@ -9,12 +17,20 @@
       "color": "#2d6a4f"
     },
     {
-      "id": "erkner",
-      "label": "Erkner",
-      "url": "/areas/erkner/",
-      "center": [52.424, 13.748],
+      "id": "wendenschloss",
+      "label": "Wendenschloss",
+      "url": "/areas/wendenschloss/",
+      "center": [52.437, 13.607],
       "zoom": 14,
-      "color": "#457b9d"
+      "color": "#8a6c3e"
+    },
+    {
+      "id": "mueggelheim",
+      "label": "Müggelheim",
+      "url": "/areas/mueggelheim/",
+      "center": [52.403, 13.640],
+      "zoom": 14,
+      "color": "#84a98c"
     },
     {
       "id": "koepenick",
@@ -25,12 +41,36 @@
       "color": "#6d5c3e"
     },
     {
-      "id": "mueggelsee-village",
-      "label": "Müggelheim",
-      "url": "/areas/mueggelsee-village/",
-      "center": [52.403, 13.640],
+      "id": "hirschgarten",
+      "label": "Hirschgarten",
+      "url": "/areas/hirschgarten/",
+      "center": [52.452, 13.733],
+      "zoom": 15,
+      "color": "#5c7a52"
+    },
+    {
+      "id": "erkner",
+      "label": "Erkner",
+      "url": "/areas/erkner/",
+      "center": [52.424, 13.748],
       "zoom": 14,
-      "color": "#84a98c"
+      "color": "#457b9d"
+    },
+    {
+      "id": "schoeneiche",
+      "label": "Schöneiche",
+      "url": "/areas/schoeneiche/",
+      "center": [52.418, 13.716],
+      "zoom": 14,
+      "color": "#6b5e9e"
+    },
+    {
+      "id": "woltersdorf",
+      "label": "Woltersdorf",
+      "url": "/areas/woltersdorf/",
+      "center": [52.438, 13.752],
+      "zoom": 14,
+      "color": "#3d7a8c"
     }
   ]
 }
