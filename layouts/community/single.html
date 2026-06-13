@@ -1,0 +1,30 @@
+{{ define "main" }}
+<div class="container">
+  <nav class="breadcrumb">
+    <a href="/">Home</a> /
+    <a href="/community/">Community</a> /
+    {{ .Title }}
+  </nav>
+
+  <div class="page-intro">
+    {{ with .Params.icon }}<span class="group-icon group-icon--large">{{ . }}</span>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.tagline }}<p class="tagline">{{ . }}</p>{{ end }}
+  </div>
+
+  {{ with .Params.meet_frequency }}
+  <div class="group-details">
+    <p><strong>Meets:</strong> {{ . }}{{ with $.Params.meet_location }} · {{ . }}{{ end }}</p>
+  </div>
+  {{ end }}
+
+  <div class="page-content">
+    {{ .Content }}
+  </div>
+
+  <div class="signup-section">
+    <h2>Join {{ .Title }}</h2>
+    {{ partial "community-signup.html" (dict "PreChecked" .Params.signup_label) }}
+  </div>
+</div>
+{{ end }}

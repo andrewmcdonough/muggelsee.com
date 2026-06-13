@@ -1,0 +1,14 @@
+{
+  "categories": [
+    { "slug": "swimming",        "label": "Swimming",     "color": "#1a7fc4" },
+    { "slug": "restaurant",      "label": "Restaurants",  "color": "#c0392b" },
+    { "slug": "cafe",            "label": "Cafés",        "color": "#7b4f2e" },
+    { "slug": "hiking",          "label": "Hiking",       "color": "#2d6a4f" },
+    { "slug": "cycling",         "label": "Cycling",      "color": "#6d4c9e" },
+    { "slug": "family-friendly", "label": "Family",       "color": "#d4a017" },
+    { "slug": "viewpoint",       "label": "Viewpoints",   "color": "#3a5f8a" },
+    { "slug": "history",         "label": "History",      "color": "#6d5c3e" },
+    { "slug": "watersports",     "label": "Watersports",  "color": "#0097a7" },
+    { "slug": "nature",          "label": "Nature",       "color": "#52796f" }
+  ]
+}

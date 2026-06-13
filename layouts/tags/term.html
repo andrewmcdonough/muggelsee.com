@@ -1,0 +1,39 @@
+{{ define "main" }}
+<div class="tag-page">
+  <div class="map-wrap">
+    <div id="map-tag" class="map"></div>
+  </div>
+  <div class="container">
+    <div class="page-intro">
+      <h1>{{ .Title | humanize }}</h1>
+      <p>{{ len .Pages }} place{{ if ne (len .Pages) 1 }}s{{ end }} tagged with "{{ .Title | humanize }}"</p>
+    </div>
+    <div class="places-grid">
+      {{ range .Pages }}
+      {{ partial "place-card.html" . }}
+      {{ end }}
+    </div>
+    {{ template "_internal/pagination.html" . }}
+  </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+{{ partial "places-data.html" . }}
+<script>
+  const MAPBOX_TOKEN = "{{ .Site.Params.mapbox_token }}";
+  const MAPBOX_STYLE = "{{ .Site.Params.mapbox_style }}";
+  const TAG_FILTER = "{{ .Data.Term }}";
+  const MAP_CENTER = [{{ .Site.Params.map_default_lon }}, {{ .Site.Params.map_default_lat }}];
+  const MAP_ZOOM = {{ .Site.Params.map_default_zoom }};
+  const CATEGORIES = [
+    {{- range $i, $c := hugo.Data.categories.categories }}
+    {{- if $i }},{{ end }}
+    {"slug":{{ $c.slug | jsonify }},"label":{{ $c.label | jsonify }},"color":{{ $c.color | jsonify }}}
+    {{- end }}
+  ];
+</script>
+{{- $js := resources.Get "js/map-tag.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{ end }}

@@ -1,0 +1,12 @@
+{{ define "main" }}
+{{- $places := where site.RegularPages "Section" "places" -}}
+<div class="gallery-page">
+  <div class="container">
+    <div class="page-intro">
+      <h1>{{ .Title }}</h1>
+      {{ with .Content }}<div class="page-content">{{ . }}</div>{{ end }}
+    </div>
+  </div>
+  {{ partial "photo-rollup.html" (dict "Pages" $places "Title" "All Photos") }}
+</div>
+{{ end }}

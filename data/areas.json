@@ -1,0 +1,36 @@
+{
+  "areas": [
+    {
+      "id": "rahnsdorf",
+      "label": "Rahnsdorf",
+      "url": "/areas/rahnsdorf/",
+      "center": [52.434, 13.698],
+      "zoom": 14,
+      "color": "#2d6a4f"
+    },
+    {
+      "id": "erkner",
+      "label": "Erkner",
+      "url": "/areas/erkner/",
+      "center": [52.424, 13.748],
+      "zoom": 14,
+      "color": "#457b9d"
+    },
+    {
+      "id": "koepenick",
+      "label": "Köpenick",
+      "url": "/areas/koepenick/",
+      "center": [52.449, 13.578],
+      "zoom": 13,
+      "color": "#6d5c3e"
+    },
+    {
+      "id": "mueggelsee-village",
+      "label": "Müggelheim",
+      "url": "/areas/mueggelsee-village/",
+      "center": [52.403, 13.640],
+      "zoom": 14,
+      "color": "#84a98c"
+    }
+  ]
+}

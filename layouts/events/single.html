@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="container">
+  <nav class="breadcrumb">
+    <a href="/">Home</a> /
+    <a href="/events/">Events</a> /
+    {{ .Title }}
+  </nav>
+  <div class="page-intro">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.event_date }}
+    <p class="event-date-display">{{ dateFormat "Monday 2 January 2006" . }}</p>
+    {{ end }}
+    {{ with .Params.location_name }}<p class="tagline">{{ . }}</p>{{ end }}
+    {{ with .Params.tags }}
+    <div class="tags">
+      {{ range . }}<a href="/tags/{{ . | urlize }}/" class="tag">{{ . | humanize }}</a>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+  <div class="page-content">
+    {{ .Content }}
+  </div>
+</div>
+{{ end }}

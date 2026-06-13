@@ -1,0 +1,7 @@
+/places/index.json
+  Cache-Control: public, max-age=3600
+
+/*.html
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

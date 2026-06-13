@@ -1,0 +1,85 @@
+{{ define "main" }}
+{{ if .Params.area_id }}
+{{/* Individual area page with map */}}
+<div class="area-page">
+  <div class="map-wrap map-wrap--tall">
+    <div id="map-area" class="map"></div>
+  </div>
+
+  <div class="container">
+    <div class="page-intro">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.tagline }}<p class="tagline">{{ . }}</p>{{ end }}
+    </div>
+
+    <div class="tag-filter"
+         x-data="{ active: [] }"
+         x-init="$watch('active', v => $dispatch('filter-change', { active: v }))">
+      <button
+        class="tag-filter-btn"
+        :class="{ 'is-all': active.length === 0 }"
+        @click="active = []">
+        All
+      </button>
+      {{- range hugo.Data.categories.categories }}
+      <button
+        class="tag-filter-btn"
+        :class="{ 'is-active': active.includes('{{ .slug }}') }"
+        @click="active.includes('{{ .slug }}') ? active.splice(active.indexOf('{{ .slug }}'), 1) : active.push('{{ .slug }}')"
+        style="--tag-color: {{ .color }}">
+        {{ .label }}
+      </button>
+      {{- end }}
+    </div>
+
+    <div class="page-content">
+      {{ .Content }}
+    </div>
+  </div>
+
+  {{/* Roll-up gallery of all photos from places in this area */}}
+  {{- $areaID := .Params.area_id -}}
+  {{- $places := where site.RegularPages "Params.area" $areaID -}}
+  {{ partial "photo-rollup.html" (dict "Pages" $places "Title" (printf "Photos from %s" .Title)) }}
+</div>
+
+{{ else }}
+{{/* Top-level /areas/ listing */}}
+<div class="container">
+  <div class="page-intro">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </div>
+  <div class="areas-grid">
+    {{- range hugo.Data.areas.areas }}
+    <a class="area-card" href="{{ .url }}" style="--area-color: {{ .color }}">
+      <span class="area-card-dot"></span>
+      <span class="area-card-label">{{ .label }}</span>
+    </a>
+    {{- end }}
+  </div>
+</div>
+{{ end }}
+{{ end }}
+
+{{ define "scripts" }}
+{{ if .Params.area_id }}
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+{{ partial "places-data.html" . }}
+<script>
+  const MAPBOX_TOKEN = "{{ .Site.Params.mapbox_token }}";
+  const MAPBOX_STYLE = "{{ .Site.Params.mapbox_style }}";
+  const AREA_ID = "{{ .Params.area_id }}";
+  const MAP_CENTER = [{{ .Params.map_center_lon }}, {{ .Params.map_center_lat }}];
+  const MAP_ZOOM = {{ .Params.map_zoom }};
+  const CATEGORIES = [
+    {{- range $i, $c := hugo.Data.categories.categories }}
+    {{- if $i }},{{ end }}
+    {"slug":{{ $c.slug | jsonify }},"label":{{ $c.label | jsonify }},"color":{{ $c.color | jsonify }}}
+    {{- end }}
+  ];
+</script>
+{{- $js := resources.Get "js/map-area.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{ end }}
+{{ end }}

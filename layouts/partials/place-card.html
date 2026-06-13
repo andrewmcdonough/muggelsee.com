@@ -1,0 +1,22 @@
+{{- $p := . -}}
+<a class="place-card" href="{{ $p.RelPermalink }}">
+  {{- with ($p.Resources.ByType "image").Get 0 -}}
+  {{- $thumb := .Fill "600x400 Smart" -}}
+  <div class="place-card-image">
+    <img src="{{ $thumb.RelPermalink }}" alt="{{ $p.Title }}" loading="lazy" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}">
+  </div>
+  {{- end }}
+  <div class="place-card-body">
+    <div class="place-card-meta">
+      {{- if $p.Params.featured }}<span class="badge badge-featured">Featured</span>{{ end }}
+      {{- with $p.Params.rating }}<span class="rating">{{ . }} / 10</span>{{ end }}
+    </div>
+    <h3 class="place-card-title">{{ $p.Title }}</h3>
+    {{- with $p.Params.address }}<p class="place-card-address">{{ . }}</p>{{ end }}
+    {{- with $p.Params.tags }}
+    <div class="tags">
+      {{- range . }}<span class="tag">{{ . | humanize }}</span>{{ end }}
+    </div>
+    {{- end }}
+  </div>
+</a>

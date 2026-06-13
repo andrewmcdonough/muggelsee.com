@@ -1,0 +1,41 @@
+baseURL = "https://muggelsee.com/"
+languageCode = "en-us"
+title = "Müggelsee"
+enableRobotsTXT = true
+googleAnalytics = "G-ZBBQ6ZER8W"
+
+[params]
+  description = "Your guide to living and exploring around Müggelsee, Berlin"
+  mapbox_style  = "mapbox://styles/mapbox/light-v11"
+  map_default_lat  = 52.438
+  map_default_lon  = 13.645
+  map_default_zoom = 12
+  formspree_id = ""
+
+[taxonomies]
+  tag = "tags"
+
+[outputs]
+  home    = ["HTML"]
+  section = ["HTML", "RSS"]
+  page    = ["HTML"]
+  term    = ["HTML"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.highlight]
+  style = "github"
+
+[imaging]
+  resampleFilter = "Lanczos"
+  quality = 85
+  anchor  = "Smart"
+  [imaging.exif]
+    disableLatLong = true
+
+[minify]
+  minifyOutput = false
+
+[pagination]
+  pagerSize = 12

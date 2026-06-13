@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="site-logo">Müggelsee</a>
+    <nav class="site-nav">
+      <a href="/areas/" {{ if eq .Section "areas" }}class="active"{{ end }}>Areas</a>
+      <a href="/places/" {{ if eq .Section "places" }}class="active"{{ end }}>Places</a>
+      <a href="/guides/" {{ if eq .Section "guides" }}class="active"{{ end }}>Guides</a>
+      <a href="/events/" {{ if eq .Section "events" }}class="active"{{ end }}>Events</a>
+      <a href="/community/" {{ if eq .Section "community" }}class="active"{{ end }}>Community</a>
+      <a href="/gallery/" {{ if eq .Section "gallery" }}class="active"{{ end }}>Gallery</a>
+    </nav>
+  </div>
+</header>

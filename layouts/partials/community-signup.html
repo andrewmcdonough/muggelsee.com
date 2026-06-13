@@ -1,0 +1,37 @@
+{{- $prechecked := .PreChecked -}}
+{{- $groups := where site.RegularPages "Section" "community" -}}
+<div class="signup-form-wrap" x-data="{ submitted: false }">
+  <form
+    {{- with site.Params.formspree_id }}
+    action="https://formspree.io/f/{{ . }}"
+    {{- else }}
+    action="#"
+    {{- end }}
+    method="POST"
+    class="signup-form"
+    x-show="!submitted"
+    @submit.prevent="submitted = true">
+    <div class="form-row">
+      <label for="signup-name">Name</label>
+      <input type="text" id="signup-name" name="name" placeholder="Your name" required>
+    </div>
+    <div class="form-row">
+      <label for="signup-email">Email</label>
+      <input type="email" id="signup-email" name="email" placeholder="your@email.com" required>
+    </div>
+    <fieldset class="form-fieldset">
+      <legend>Interested in</legend>
+      {{- range $groups }}
+      <label class="checkbox-label">
+        <input type="checkbox" name="groups" value="{{ .Params.signup_label }}"
+          {{ if eq .Params.signup_label $prechecked }}checked{{ end }}>
+        {{ with .Params.icon }}{{ . }} {{ end }}{{ .Title }}
+      </label>
+      {{- end }}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+  </form>
+  <div class="signup-thanks" x-show="submitted" x-cloak>
+    <p>Thanks — we'll be in touch.</p>
+  </div>
+</div>

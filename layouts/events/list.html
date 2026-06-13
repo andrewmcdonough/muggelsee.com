@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="container">
+  <div class="page-intro">
+    <h1>{{ .Title }}</h1>
+  </div>
+  <div class="events-list">
+    {{ range .Pages }}
+    <article class="event-item">
+      <div class="event-date">
+        {{ with .Params.event_date }}{{ dateFormat "2 Jan 2006" . }}{{ end }}
+      </div>
+      <div class="event-body">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        {{ with .Params.location_name }}<p class="event-location">{{ . }}</p>{{ end }}
+        {{ with .Params.tags }}
+        <div class="tags">
+          {{ range . }}<span class="tag">{{ . | humanize }}</span>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

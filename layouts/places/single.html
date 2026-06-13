@@ -1,0 +1,129 @@
+{{ define "main" }}
+{{- $images := .Resources.ByType "image" -}}
+{{- $hero := index $images 0 -}}
+{{- $rest := after 1 $images -}}
+
+{{ if $images }}
+<script>
+window.GALLERY_IMAGES = [{{ range $i, $img := $images }}{{ if $i }},{{ end }}{"src":"{{ ($img.Resize "1400x").RelPermalink }}","caption":"{{ $img.Params.caption | default "" }}"}{{ end }}];
+</script>
+{{ end }}
+
+<div class="place-page"{{ if $images }} x-data="{ images: window.GALLERY_IMAGES, index: null }" @keydown.escape.window="index = null" @keydown.arrowleft.window="index !== null && index > 0 && index--" @keydown.arrowright.window="index !== null && index < images.length - 1 && index++"{{ end }}>
+
+  {{- if $hero -}}
+  {{- $heroCrop := $hero.Fill "1200x500 Smart" -}}
+  <div class="photo-hero">
+    <button class="photo-hero-btn" @click="index = 0" aria-label="View full size photo">
+      <img src="{{ $heroCrop.RelPermalink }}"
+           alt="{{ $hero.Params.caption | default .Title }}"
+           width="{{ $heroCrop.Width }}" height="{{ $heroCrop.Height }}"
+           loading="eager">
+    </button>
+    {{ with $hero.Params.caption }}<p class="photo-caption photo-caption--hero">{{ . }}</p>{{ end }}
+  </div>
+  {{- end }}
+
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="/">Home</a> /
+      <a href="/areas/">Areas</a>
+      {{ with .Params.area }} /
+      <a href="/areas/{{ . }}/">{{ . | title }}</a>
+      {{ end }} /
+      {{ .Title }}
+    </nav>
+
+    <div class="place-header">
+      <div class="place-header-text">
+        <div class="place-meta-top">
+          {{ if .Params.featured }}<span class="badge badge-featured">Featured</span>{{ end }}
+          {{ with .Params.rating }}<span class="rating">{{ . }} / 10</span>{{ end }}
+        </div>
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.tagline }}<p class="tagline">{{ . }}</p>{{ end }}
+        {{ with .Params.tags }}
+        <div class="tags">
+          {{ range . }}
+          <a href="/tags/{{ . | urlize }}/" class="tag">{{ . | humanize }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="place-info-box">
+        {{ with .Params.address }}<p><strong>Address</strong><br>{{ . }}</p>{{ end }}
+        {{ with .Params.opening_hours }}<p><strong>Hours</strong><br>{{ . }}</p>{{ end }}
+        {{ with .Params.website }}<p><a href="{{ . }}" target="_blank" rel="noopener">Visit website &rarr;</a></p>{{ end }}
+      </div>
+    </div>
+
+    <div class="place-content">
+      {{ .Content }}
+    </div>
+
+    {{ if $rest }}
+    <div class="gallery-section">
+      <div class="gallery-grid">
+        {{- range $i, $img := $rest -}}
+        {{- $thumb := $img.Fill "400x300 Smart" -}}
+        <button class="gallery-thumb" @click="index = {{ add $i 1 }}" aria-label="{{ $img.Params.caption | default "View photo" }}">
+          <img src="{{ $thumb.RelPermalink }}"
+               alt="{{ $img.Params.caption | default $.Title }}"
+               width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+               loading="lazy">
+          {{ with $img.Params.caption }}<span class="gallery-caption">{{ . }}</span>{{ end }}
+        </button>
+        {{- end }}
+      </div>
+    </div>
+    {{ end }}
+
+    {{ with .Params.lat }}
+    <div class="place-map-wrap">
+      <div id="map-place" class="map map--small"></div>
+    </div>
+    {{ end }}
+
+    {{ $others := where .Site.RegularPages "Params.area" .Params.area }}
+    {{ $others = where $others "Permalink" "ne" .Permalink }}
+    {{ if $others }}
+    <div class="related-places">
+      <h2>More in {{ .Params.area | title }}</h2>
+      <div class="places-grid places-grid--compact">
+        {{ range first 3 $others }}
+        {{ partial "place-card.html" . }}
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+  {{ if $images }}
+  <div class="lightbox" x-show="index !== null" x-cloak @click.self="index = null">
+    <button class="lightbox-nav lightbox-prev" @click.stop="index > 0 && index--" x-show="index > 0" aria-label="Previous photo">&#8249;</button>
+    <div class="lightbox-inner" @click.stop>
+      <img :src="images[index]?.src ?? ''" :alt="images[index]?.caption ?? ''" class="lightbox-img">
+      <p class="lightbox-caption" x-text="images[index]?.caption ?? ''" x-show="images[index]?.caption"></p>
+    </div>
+    <button class="lightbox-nav lightbox-next" @click.stop="index < images.length - 1 && index++" x-show="index !== null && index < images.length - 1" aria-label="Next photo">&#8250;</button>
+    <button class="lightbox-close" @click.stop="index = null" aria-label="Close lightbox">&times;</button>
+  </div>
+  {{ end }}
+
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+{{ with .Params.lat }}
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+<script>
+  const MAPBOX_TOKEN = "{{ $.Site.Params.mapbox_token }}";
+  const MAPBOX_STYLE = "{{ $.Site.Params.mapbox_style }}";
+  const PLACE_LAT = {{ $.Params.lat }};
+  const PLACE_LON = {{ $.Params.lon }};
+  const PLACE_TITLE = {{ $.Title | jsonify }};
+</script>
+{{- $js := resources.Get "js/map-place.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{ end }}
+{{ end }}

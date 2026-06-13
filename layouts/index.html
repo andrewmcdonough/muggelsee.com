@@ -1,0 +1,65 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="container">
+    <h1>{{ .Site.Title }}</h1>
+    {{ .Content }}
+  </div>
+</section>
+
+<section class="section-map">
+  <div class="map-wrap">
+    <div id="map-home" class="map"></div>
+  </div>
+  <div class="area-links">
+    {{- range hugo.Data.areas.areas }}
+    <a href="{{ .url }}" class="area-link" style="--area-color: {{ .color }}">{{ .label }}</a>
+    {{- end }}
+  </div>
+</section>
+
+{{- $featured := where .Site.RegularPages "Params.featured" true -}}
+{{- if $featured }}
+<section class="section-featured">
+  <div class="container">
+    <h2>Featured places</h2>
+    <div class="places-grid">
+      {{- range $featured }}
+      {{ partial "place-card.html" . }}
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+
+<section class="section-areas">
+  <div class="container">
+    <h2>Explore by area</h2>
+    <div class="areas-grid">
+      {{- range hugo.Data.areas.areas }}
+      <a class="area-card" href="{{ .url }}" style="--area-color: {{ .color }}">
+        <span class="area-card-dot"></span>
+        <span class="area-card-label">{{ .label }}</span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+<script>
+  const MAPBOX_TOKEN = "{{ .Site.Params.mapbox_token }}";
+  const MAPBOX_STYLE = "{{ .Site.Params.mapbox_style }}";
+  const AREAS = [
+    {{- range $i, $a := hugo.Data.areas.areas }}
+    {{- if $i }},{{ end }}
+    {"id":{{ $a.id | jsonify }},"label":{{ $a.label | jsonify }},"url":{{ $a.url | jsonify }},"center":[{{ index $a.center 0 }},{{ index $a.center 1 }}],"color":{{ $a.color | jsonify }}}
+    {{- end }}
+  ];
+  const MAP_CENTER = [{{ .Site.Params.map_default_lon }}, {{ .Site.Params.map_default_lat }}];
+  const MAP_ZOOM = {{ .Site.Params.map_default_zoom }};
+</script>
+{{- $js := resources.Get "js/map-home.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{ end }}

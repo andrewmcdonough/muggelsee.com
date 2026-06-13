@@ -1,0 +1,58 @@
+{{/* Roll-up photo gallery for area and global gallery pages.
+     Call with: partial "photo-rollup.html" (dict "Pages" $places "Title" "Photos from Rahnsdorf") */}}
+{{- $pages := .Pages -}}
+{{- $title := .Title -}}
+{{- $allItems := slice -}}
+{{- range $pages -}}
+  {{- $pageTitle := .Title -}}
+  {{- $pageURL := .RelPermalink -}}
+  {{- range .Resources.ByType "image" -}}
+    {{- $allItems = $allItems | append (dict "img" . "pageTitle" $pageTitle "pageURL" $pageURL) -}}
+  {{- end -}}
+{{- end -}}
+{{ if $allItems }}
+<script>
+window.GALLERY_IMAGES = [{{ range $i, $item := $allItems }}{{ if $i }},{{ end }}{"src":"{{ ($item.img.Resize "1400x").RelPermalink }}","caption":"{{ $item.img.Params.caption | default "" }}","page":"{{ $item.pageTitle }}","pageURL":"{{ $item.pageURL }}"}{{ end }}];
+</script>
+<div class="gallery-rollup-section">
+  <div class="container">
+    <div class="gallery-rollup"
+         x-data="{ images: window.GALLERY_IMAGES, index: null }"
+         @keydown.escape.window="index = null"
+         @keydown.arrowleft.window="index !== null && index > 0 && index--"
+         @keydown.arrowright.window="index !== null && index < images.length - 1 && index++">
+      <div class="gallery-rollup-header">
+        <h2>{{ $title }}</h2>
+        <span class="gallery-count">{{ len $allItems }} photo{{ if ne (len $allItems) 1 }}s{{ end }}</span>
+      </div>
+      <div class="gallery-grid gallery-grid--rollup">
+        {{- range $i, $item := $allItems -}}
+        {{- $thumb := $item.img.Fill "300x225 Smart" -}}
+        <button class="gallery-thumb gallery-thumb--rollup" @click="index = {{ $i }}" aria-label="{{ $item.img.Params.caption | default $item.pageTitle }}">
+          <img src="{{ $thumb.RelPermalink }}"
+               alt="{{ $item.img.Params.caption | default $item.pageTitle }}"
+               width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+               loading="lazy">
+          <span class="gallery-thumb-info">
+            {{ with $item.img.Params.caption }}<span class="gallery-caption">{{ . }}</span>{{ end }}
+            <span class="gallery-place-name">{{ $item.pageTitle }}</span>
+          </span>
+        </button>
+        {{- end }}
+      </div>
+      <div class="lightbox" x-show="index !== null" x-cloak @click.self="index = null">
+        <button class="lightbox-nav lightbox-prev" @click.stop="index > 0 && index--" x-show="index > 0" aria-label="Previous">&#8249;</button>
+        <div class="lightbox-inner" @click.stop>
+          <img :src="images[index]?.src ?? ''" :alt="images[index]?.caption ?? images[index]?.page ?? ''" class="lightbox-img">
+          <div class="lightbox-meta">
+            <p class="lightbox-caption" x-text="images[index]?.caption" x-show="images[index]?.caption"></p>
+            <a class="lightbox-place-link" :href="images[index]?.pageURL" x-text="images[index]?.page"></a>
+          </div>
+        </div>
+        <button class="lightbox-nav lightbox-next" @click.stop="index < images.length - 1 && index++" x-show="index !== null && index < images.length - 1" aria-label="Next">&#8250;</button>
+        <button class="lightbox-close" @click.stop="index = null" aria-label="Close">&times;</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="container">
+  <div class="page-intro">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </div>
+
+  <div class="groups-grid">
+    {{ range .Pages }}
+    <a class="group-card" href="{{ .RelPermalink }}">
+      {{ with .Params.icon }}<span class="group-icon">{{ . }}</span>{{ end }}
+      <h3>{{ .Title }}</h3>
+      {{ with .Params.tagline }}<p>{{ . }}</p>{{ end }}
+      {{ with .Params.meet_frequency }}<span class="group-meta">{{ . }}</span>{{ end }}
+    </a>
+    {{ end }}
+  </div>
+
+  <div class="signup-section">
+    <h2>Join the community</h2>
+    <p>Sign up and tell us which groups you're interested in. We'll reach out when something is happening.</p>
+    {{ partial "community-signup.html" (dict "PreChecked" "") }}
+  </div>
+</div>
+{{ end }}
