@@ -4,8 +4,8 @@ date            = 2025-01-01
 draft           = false
 area_id         = "hirschgarten"
 tagline         = "Wooded enclave between Rahnsdorf and the Brandenburg border"
-map_center_lat  = 52.454582
-map_center_lon  = 13.5649118
+map_center_lat  = 52.454588
+map_center_lon  = 13.5935803
 map_zoom        = 15
 +++
 
