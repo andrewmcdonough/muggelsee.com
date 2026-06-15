@@ -44,7 +44,7 @@
       "id": "hirschgarten",
       "label": "Hirschgarten",
       "url": "/areas/hirschgarten/",
-      "center": [52.454582, 13.5649118],
+      "center": [52.454588,13.5935803],
       "zoom": 15,
       "color": "#5c7a52"
     },
@@ -68,7 +68,7 @@
       "id": "woltersdorf",
       "label": "Woltersdorf",
       "url": "/areas/woltersdorf/",
-      "center": [52.438, 13.752],
+      "center": [52.448906,13.7199781],
       "zoom": 14,
       "color": "#3d7a8c"
     }
