@@ -121,7 +121,7 @@ window.GALLERY_IMAGES = [{{ range $i, $img := $images }}{{ if $i }},{{ end }}{"s
   const MAPBOX_STYLE = "{{ $.Site.Params.mapbox.style }}";
   const PLACE_LAT = {{ $.Params.lat }};
   const PLACE_LON = {{ $.Params.lon }};
-  const PLACE_TITLE = {{ $.Title | jsonify }};
+  const PLACE_TITLE = "{{ $.Title }}";
 </script>
 {{- $js := resources.Get "js/map-place.js" | minify | fingerprint -}}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

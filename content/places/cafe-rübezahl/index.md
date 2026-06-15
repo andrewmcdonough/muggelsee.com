@@ -1,9 +1,9 @@
 +++
-title         = "Café Rübezahl"
+title         = "Rübezahl"
 date          = 2025-01-01
 draft         = false
 tags          = ["cafe", "watersports", "family-friendly"]
-area          = "mueggelsee-village"
+area          = "mueggelheim"
 lat           = 52.4155
 lon           = 13.6272
 rating        = 8.0

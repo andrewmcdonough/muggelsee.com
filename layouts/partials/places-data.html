@@ -5,7 +5,7 @@ window.PLACES_GEOJSON = {"type":"FeatureCollection","features":[
 {{- range $i, $p := $places -}}
 {{- if and $p.Params.lat $p.Params.lon -}}
 {{- if $i }},{{ end }}
-{"type":"Feature","geometry":{"type":"Point","coordinates":[{{ $p.Params.lon }},{{ $p.Params.lat }}]},"properties":{"title":{{ $p.Title | jsonify }},"url":{{ $p.RelPermalink | jsonify }},"area":{{ $p.Params.area | jsonify }},"tags":{{ $p.Params.tags | jsonify }},"rating":{{ $p.Params.rating | default 0 }},"featured":{{ $p.Params.featured | default false }},"address":{{ $p.Params.address | jsonify }}}}
+{"type":"Feature","geometry":{"type":"Point","coordinates":[{{ $p.Params.lon }},{{ $p.Params.lat }}]},"properties":{"title":"{{ $p.Title }}","url":"{{ $p.RelPermalink }}","area":"{{ $p.Params.area }}","tags":[{{ range $ti, $t := $p.Params.tags }}{{ if $ti }},{{ end }}"{{ $t }}"{{ end }}],"rating":{{ $p.Params.rating | default 0 }},"featured":{{ $p.Params.featured | default false }},"address":"{{ $p.Params.address }}"}}
 {{- end -}}
 {{- end }}
 ]};

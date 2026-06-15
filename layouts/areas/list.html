@@ -75,7 +75,7 @@
   const CATEGORIES = [
     {{- range $i, $c := hugo.Data.categories.categories }}
     {{- if $i }},{{ end }}
-    {"slug":{{ $c.slug | jsonify }},"label":{{ $c.label | jsonify }},"color":{{ $c.color | jsonify }}}
+    {"slug":"{{ $c.slug }}","label":"{{ $c.label }}","color":"{{ $c.color }}"}
     {{- end }}
   ];
 </script>

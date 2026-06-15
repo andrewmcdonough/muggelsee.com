@@ -11,7 +11,6 @@
 {{- end }}
 <section class="hero">
   <div class="container">
-    <h1>{{ .Site.Title }}</h1>
     {{ .Content }}
   </div>
 </section>
@@ -64,7 +63,7 @@
   const AREAS = [
     {{- range $i, $a := hugo.Data.areas.areas }}
     {{- if $i }},{{ end }}
-    {"id":{{ $a.id | jsonify }},"label":{{ $a.label | jsonify }},"url":{{ $a.url | jsonify }},"center":[{{ index $a.center 0 }},{{ index $a.center 1 }}],"color":{{ $a.color | jsonify }}}
+    {"id":"{{ $a.id }}","label":"{{ $a.label }}","url":"{{ $a.url }}","center":[{{ index $a.center 0 }},{{ index $a.center 1 }}],"color":"{{ $a.color }}"}
     {{- end }}
   ];
   const MAP_CENTER = [{{ .Site.Params.map_default_lon }}, {{ .Site.Params.map_default_lat }}];
