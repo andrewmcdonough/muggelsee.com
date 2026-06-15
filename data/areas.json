@@ -4,7 +4,7 @@
       "id": "friedrichshagen",
       "label": "Friedrichshagen",
       "url": "/areas/friedrichshagen/",
-      "center": [52.458, 13.621],
+      "center": [52.450, 13.621],
       "zoom": 14,
       "color": "#b06a2e"
     },
@@ -28,7 +28,7 @@
       "id": "mueggelheim",
       "label": "Müggelheim",
       "url": "/areas/mueggelheim/",
-      "center": [52.403, 13.640],
+      "center": [52.4233351,13.6706783],
       "zoom": 14,
       "color": "#84a98c"
     },
@@ -60,7 +60,7 @@
       "id": "schoeneiche",
       "label": "Schöneiche",
       "url": "/areas/schoeneiche/",
-      "center": [52.4777931, 13.6643541],
+      "center": [52.4627931, 13.6943541],
       "zoom": 14,
       "color": "#6b5e9e"
     },
