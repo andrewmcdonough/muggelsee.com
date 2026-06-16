@@ -1,9 +1,20 @@
-<header class="site-header">
+<header class="site-header" x-data="{ open: false }" @keydown.escape.window="open = false">
   <div class="container">
     <a href="/" class="site-logo" aria-label="Müggelsee — home">
       <img src="/logo.png" alt="Müggelsee" height="38">
     </a>
-    <nav class="site-nav">
+    <button class="nav-hamburger" @click="open = !open" :aria-expanded="open.toString()" aria-label="Toggle navigation">
+      <svg x-show="!open" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="2" y1="6" x2="20" y2="6"/>
+        <line x1="2" y1="11" x2="20" y2="11"/>
+        <line x1="2" y1="16" x2="20" y2="16"/>
+      </svg>
+      <svg x-show="open" x-cloak width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="4" x2="18" y2="18"/>
+        <line x1="18" y1="4" x2="4" y2="18"/>
+      </svg>
+    </button>
+    <nav class="site-nav" :class="{ 'is-open': open }" @click.outside="open = false">
       <a href="/areas/" {{ if eq .Section "areas" }}class="active"{{ end }}>Areas</a>
       <a href="/places/" {{ if eq .Section "places" }}class="active"{{ end }}>Places</a>
       <a href="/guides/" {{ if eq .Section "guides" }}class="active"{{ end }}>Guides</a>

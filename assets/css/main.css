@@ -151,6 +151,16 @@ p:last-child { margin-bottom: 0; }
   font-style: italic;
 }
 
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  color: var(--color-dark);
+  line-height: 0;
+}
+
 /* =============================================
    Footer
    ============================================= */
@@ -1043,7 +1053,34 @@ input[type="checkbox"] {
 @media (max-width: 768px) {
   h1 { font-size: var(--text-2xl); }
 
-  .site-nav { gap: var(--space-4); }
+  .nav-hamburger { display: flex; }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-6);
+    gap: var(--space-5);
+    z-index: 99;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .site-nav.is-open { display: flex; }
+
+  .site-nav a { font-size: var(--text-base, 1rem); }
+
+  .site-nav .nav-lang {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
 
   .hero { padding: var(--space-10) 0 var(--space-8); }
 
@@ -1069,7 +1106,6 @@ input[type="checkbox"] {
 
 @media (max-width: 480px) {
   .container { padding: 0 var(--space-4); }
-  .site-nav { display: none; }
 
   .photo-hero-btn img { height: 220px; }
 
